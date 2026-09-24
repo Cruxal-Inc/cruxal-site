@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cruxal</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%AD%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --color-navy: #10182B;
+    --color-ground: #FAFAFA;
+    --color-white: #FFFFFF;
+    --color-accent-text: #2C6D97;
+    --color-accent-hover: #2A6690;
+    --color-char: #2B3034;
+    --color-gray: #5F6568;
+    --color-rule: #DCDDD8;
+
+    --font-sans: 'IBM Plex Sans', -apple-system, sans-serif;
+
+    --text-h1: 44px;
+    --text-h2: 30px;
+    --text-h3: 20px;
+    --text-body: 17px;
+    --text-nav: 15px;
+    --text-footer: 12px;
+
+    --surface-page: var(--color-ground);
+    --text-primary: var(--color-char);
+    --text-secondary: var(--color-gray);
+    --accent-text: var(--color-accent-text);
+    --accent-hover: var(--color-accent-hover);
+    --wordmark-color: var(--color-navy);
+    --rule: var(--color-rule);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --surface-page: #10182B;
+      --accent-text: #4FA3D9;
+      --accent-hover: #6BB4E0;
+      --text-primary: #E8E9E6;
+      --text-secondary: #8A9099;
+      --wordmark-color: #E8E9E6;
+      --rule: #2A3348;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --surface-page: #10182B;
+    --accent-text: #4FA3D9;
+    --accent-hover: #6BB4E0;
+    --text-primary: #E8E9E6;
+    --text-secondary: #8A9099;
+    --wordmark-color: #E8E9E6;
+    --rule: #2A3348;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--surface-page);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body { min-height: 100vh; display: flex; flex-direction: column; }
+
+  a { color: var(--accent-text); text-decoration: none; }
+  a:hover { color: var(--accent-hover); text-decoration: underline; }
+
+  .row {
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  header.nav {
+    position: relative;
+    height: 64px;
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 24px;
+    flex-shrink: 0;
+  }
+
+  .logo { position: absolute; top: 0; left: 24px; height: 64px; display: flex; align-items: center; }
+  .logo svg { height: 22px; width: auto; color: var(--wordmark-color); }
+
+  .nav-contact { position: absolute; top: 0; right: 24px; height: 64px; display: flex; align-items: center; }
+  .nav-contact a { font-size: var(--text-nav); font-weight: 500; color: var(--text-secondary); }
+  .nav-contact a:hover { color: var(--accent-text); }
+
+  main { flex: 1 0 auto; padding-bottom: 72px; }
+
+  .hero { padding: 88px 0 8px; }
+
+  .headline {
+    font-size: var(--text-h1);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin: 0 0 20px;
+  }
+
+  .subhead {
+    font-size: var(--text-body);
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0;
+    max-width: 52ch;
+  }
+
+  section.block {
+    padding: 48px 0 0;
+    margin-top: 48px;
+    border-top: 1px solid var(--rule);
+  }
+
+  section.block h2 {
+    font-size: var(--text-h2);
+    font-weight: 600;
+    line-height: 1.25;
+    margin: 0 0 20px;
+  }
+
+  section.block p {
+    font-size: var(--text-body);
+    font-weight: 400;
+    line-height: 1.65;
+    color: var(--text-primary);
+    margin: 0;
+    max-width: 60ch;
+  }
+
+  section.block p + p { margin-top: 14px; }
+
+  .block .intro-line {
+    font-size: var(--text-body);
+    color: var(--text-primary);
+    line-height: 1.65;
+    max-width: 60ch;
+    margin: 0 0 32px;
+  }
+
+  .triad { display: flex; flex-direction: column; gap: 28px; }
+  .triad h3 { font-size: var(--text-h3); font-weight: 600; margin: 0 0 8px; }
+  .triad p { font-size: var(--text-body); line-height: 1.6; color: var(--text-primary); margin: 0; max-width: 58ch; }
+
+  footer { flex-shrink: 0; border-top: 1px solid var(--rule); }
+  footer .row { padding-top: 32px; padding-bottom: 40px; }
+  footer .company { font-size: var(--text-body); font-weight: 600; margin: 0 0 4px; }
+  footer .address { font-size: var(--text-footer); color: var(--text-secondary); margin: 0 0 10px; }
+  footer .contact a { font-size: 15px; font-weight: 500; }
+
+  @media (max-width: 480px) {
+    :root { --text-h1: 32px; --text-h2: 24px; }
+    .hero { padding: 64px 0 8px; }
+    header.nav { height: 56px; }
+    .logo, .nav-contact { height: 56px; }
+    .logo svg { height: 18px; }
+    section.block { padding-top: 36px; margin-top: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a class="logo" href="#top" aria-label="Cruxal">
+    <svg viewBox="0 0 1944 251" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cruxal">
+      <g fill="currentColor" fill-rule="evenodd">
+        <path d="M 1170 130 L 1155 147 L 1155 166 L 1164 178 L 1170 184 L 1177 194 L 1183 200 L 1191 211 L 1210 233 L 1213 238 L 1215 239 L 1269 239 L 1269 237 L 1267 234 L 1262 229 L 1251 214 L 1245 208 L 1238 198 L 1224 182 L 1212 166 L 1205 159 L 1201 153 L 1191 142 L 1187 136 L 1181 130 Z" />
+        <path d="M 1129 132 L 1126 130 L 1116 130 L 1108 138 L 1105 143 L 1099 149 L 1090 161 L 1084 167 L 1084 168 L 1075 178 L 1071 184 L 1061 195 L 1055 204 L 1044 216 L 1038 225 L 1031 232 L 1027 238 L 1028 239 L 1082 239 L 1085 236 L 1094 224 L 1099 219 L 1102 214 L 1107 209 L 1110 204 L 1115 199 L 1115 198 L 1120 193 L 1120 192 L 1125 187 L 1125 186 L 1130 181 L 1130 180 L 1141 167 L 1141 146 L 1129 133 Z" />
+        <path d="M 1746 13 L 1746 238 L 1747 239 L 1933 239 L 1935 238 L 1935 199 L 1913 199 L 1912 198 L 1906 198 L 1905 199 L 1892 199 L 1891 198 L 1794 198 L 1793 197 L 1793 14 L 1792 13 Z" />
+        <path d="M 1269 13 L 1214 13 L 1213 14 L 1213 15 L 1207 21 L 1198 33 L 1194 37 L 1193 36 L 1194 37 L 1173 62 L 1173 63 L 1160 78 L 1160 79 L 1155 84 L 1155 103 L 1162 111 L 1162 112 L 1169 119 L 1169 120 L 1179 120 L 1180 121 L 1189 112 L 1193 106 L 1198 101 L 1198 100 L 1203 95 L 1203 94 L 1208 89 L 1213 82 L 1219 76 L 1222 71 L 1228 65 L 1236 54 L 1242 48 L 1246 42 L 1269 15 Z" />
+        <path d="M 1028 13 L 1028 15 L 1032 19 L 1032 20 L 1037 25 L 1037 26 L 1055 47 L 1064 59 L 1069 64 L 1069 65 L 1075 71 L 1078 76 L 1089 88 L 1093 94 L 1099 100 L 1108 112 L 1117 121 L 1124 121 L 1125 120 L 1127 120 L 1141 105 L 1141 83 L 1124 63 L 1124 62 L 1113 50 L 1105 39 L 1098 32 L 1092 24 L 1093 23 L 1092 24 L 1083 14 L 1083 13 Z" />
+        <path d="M 698 13 L 698 157 L 699 158 L 700 171 L 701 172 L 701 175 L 702 176 L 702 179 L 703 180 L 705 188 L 710 199 L 717 209 L 730 222 L 739 228 L 753 235 L 755 235 L 762 238 L 765 238 L 766 239 L 776 240 L 777 241 L 784 241 L 785 242 L 813 242 L 814 241 L 821 241 L 822 240 L 827 240 L 828 239 L 836 238 L 837 237 L 848 234 L 860 228 L 874 218 L 888 201 L 895 186 L 895 184 L 898 177 L 898 174 L 899 173 L 899 169 L 900 168 L 901 151 L 902 150 L 902 14 L 901 13 L 855 13 L 855 151 L 854 152 L 854 159 L 851 167 L 851 170 L 849 173 L 848 177 L 843 184 L 832 194 L 826 197 L 816 199 L 815 200 L 809 200 L 808 201 L 790 201 L 789 200 L 784 200 L 783 199 L 780 199 L 779 198 L 774 197 L 761 189 L 757 185 L 751 175 L 752 173 L 751 174 L 750 173 L 751 171 L 750 172 L 749 171 L 749 169 L 750 168 L 749 169 L 748 168 L 747 162 L 746 161 L 746 156 L 745 155 L 745 13 Z" />
+        <path d="M 357 13 L 356 14 L 356 238 L 357 239 L 402 239 L 403 238 L 403 166 L 407 164 L 416 164 L 417 165 L 429 165 L 430 164 L 450 164 L 451 165 L 453 165 L 456 168 L 488 211 L 493 216 L 499 225 L 507 234 L 509 238 L 511 239 L 563 239 L 564 238 L 551 221 L 543 209 L 539 205 L 540 203 L 539 204 L 536 201 L 524 184 L 519 179 L 511 167 L 504 159 L 506 156 L 510 155 L 522 149 L 532 142 L 543 131 L 548 122 L 550 120 L 550 118 L 553 113 L 553 111 L 555 107 L 555 104 L 556 103 L 556 99 L 557 98 L 557 77 L 556 76 L 556 71 L 555 70 L 555 67 L 554 66 L 552 58 L 544 44 L 535 35 L 521 25 L 507 19 L 504 19 L 503 18 L 500 18 L 495 16 L 491 16 L 490 15 L 486 15 L 485 14 L 476 14 L 475 13 Z M 403 55 L 404 54 L 475 54 L 476 55 L 480 55 L 481 56 L 484 56 L 490 59 L 492 59 L 498 63 L 503 68 L 507 74 L 508 80 L 509 81 L 509 96 L 508 97 L 507 102 L 503 109 L 496 116 L 480 123 L 476 123 L 475 124 L 404 124 L 403 123 Z" />
+        <path d="M 1476 12 L 1470 24 L 1470 26 L 1466 34 L 1464 36 L 1462 40 L 1462 42 L 1453 59 L 1453 61 L 1446 73 L 1446 75 L 1436 94 L 1436 96 L 1431 104 L 1431 106 L 1426 115 L 1426 117 L 1399 171 L 1399 173 L 1390 190 L 1390 192 L 1380 211 L 1380 213 L 1367 239 L 1415 239 L 1417 237 L 1420 231 L 1420 229 L 1430 210 L 1430 208 L 1434 201 L 1434 199 L 1438 193 L 1438 191 L 1441 186 L 1460 186 L 1461 185 L 1477 185 L 1478 186 L 1540 185 L 1541 186 L 1553 186 L 1555 188 L 1554 190 L 1555 189 L 1562 202 L 1562 204 L 1569 217 L 1569 219 L 1579 239 L 1628 239 L 1628 237 L 1624 230 L 1624 228 L 1618 217 L 1618 215 L 1616 213 L 1610 201 L 1610 199 L 1597 173 L 1597 171 L 1589 156 L 1589 154 L 1582 142 L 1582 140 L 1574 125 L 1574 123 L 1543 61 L 1543 59 L 1539 51 L 1537 49 L 1536 45 L 1531 35 L 1529 33 L 1529 31 L 1519 12 Z M 1497 66 L 1499 67 L 1506 81 L 1506 83 L 1510 90 L 1510 92 L 1518 107 L 1518 109 L 1525 122 L 1525 124 L 1535 143 L 1535 145 L 1534 146 L 1461 146 L 1460 145 L 1462 142 L 1463 144 L 1462 140 L 1468 129 L 1468 127 L 1482 99 L 1482 97 L 1491 79 L 1491 77 Z" />
+        <path d="M 101 13 L 97 15 L 94 15 L 93 16 L 82 19 L 77 22 L 75 22 L 55 34 L 45 43 L 44 43 L 33 54 L 22 70 L 15 84 L 15 86 L 12 93 L 12 96 L 10 101 L 10 105 L 9 106 L 9 112 L 8 113 L 8 140 L 9 141 L 9 148 L 10 149 L 11 157 L 12 158 L 14 166 L 16 169 L 16 171 L 18 174 L 18 176 L 20 178 L 22 183 L 30 195 L 35 200 L 35 201 L 50 215 L 68 227 L 72 229 L 74 229 L 79 232 L 81 232 L 84 234 L 86 234 L 96 238 L 100 238 L 101 239 L 105 239 L 106 240 L 111 240 L 112 241 L 117 241 L 118 242 L 145 242 L 146 241 L 155 241 L 156 240 L 165 239 L 166 238 L 173 237 L 174 236 L 182 234 L 185 232 L 190 231 L 211 220 L 214 217 L 222 212 L 233 201 L 234 201 L 234 199 L 211 176 L 203 170 L 193 179 L 182 187 L 168 194 L 166 194 L 163 196 L 160 196 L 156 198 L 153 198 L 152 199 L 146 199 L 145 200 L 122 200 L 121 199 L 111 198 L 110 197 L 105 196 L 102 194 L 100 194 L 89 188 L 81 182 L 70 170 L 63 159 L 63 157 L 61 154 L 61 152 L 58 145 L 58 142 L 57 141 L 57 134 L 56 133 L 56 119 L 57 118 L 58 107 L 59 106 L 61 98 L 70 82 L 85 67 L 94 61 L 102 57 L 104 57 L 111 54 L 120 53 L 121 52 L 146 52 L 147 53 L 155 54 L 156 55 L 164 57 L 167 59 L 169 59 L 179 64 L 181 66 L 187 69 L 203 82 L 226 59 L 226 58 L 233 51 L 233 49 L 220 37 L 208 29 L 190 20 L 182 18 L 179 16 L 176 16 L 175 15 L 172 15 L 167 13 L 163 13 L 162 12 L 158 12 L 157 11 L 149 11 L 148 10 L 121 10 L 120 11 L 112 11 L 111 12 Z" />
+      </g>
+    </svg>
+  </a>
+  <div class="nav-contact">
+    <a href="mailto:info@cruxal.ai">Contact</a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="row">
+
+    <section class="hero">
+      <h1 class="headline">Know what matters.<br>When it changes.<br>What it changes.</h1>
+      <p class="subhead">Cruxal helps manufacturing leaders make better decisions about important new-product programs as the evidence behind their business case changes.</p>
+    </section>
+
+    <section class="block">
+      <h2>Important programs rarely fail all at once.</h2>
+      <p>They weaken over time.</p>
+      <p>Customer expectations change. Technical assumptions prove stronger or weaker than expected. Costs move. Timelines shift. Capacity tightens. Competitive conditions change.</p>
+      <p>The information usually exists somewhere: across business cases, gate reviews, account plans, spreadsheets, systems, meetings, and people&rsquo;s judgment.</p>
+      <p>What is often missing is a continuously updated view of whether the logic behind the original commitment still holds.</p>
+      <p>By the time the consequences are obvious, the best options may already be gone.</p>
+    </section>
+
+    <section class="block">
+      <h2>Cruxal keeps the decision logic live.</h2>
+      <p class="intro-line">Cruxal turns the assumptions, evidence, dependencies, economics, and decision conditions behind an important program into a maintained decision model.</p>
+      <div class="triad">
+        <div>
+          <h3>Model what must be true.</h3>
+          <p>Make the critical assumptions and dependencies behind the program explicit, including important conditions that may never have been clearly stated.</p>
+        </div>
+        <div>
+          <h3>Keep it connected to evidence.</h3>
+          <p>As customer, technical, commercial, operational, and financial evidence changes, Cruxal reassesses the case rather than waiting for lagging results.</p>
+        </div>
+        <div>
+          <h3>Show what the change means.</h3>
+          <p>Cruxal connects new evidence to the consequences for the program and business case, and helps management understand what choices still remain while there is time to act.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Starting with customer-driven new product programs.</h2>
+      <p>Cruxal is initially focused on consequential decisions about live customer-driven NPD programs in manufacturing, where commercial, technical, operational, and financial assumptions are tightly connected and the cost of learning too late can be significant.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="row">
+    <p class="company">Cruxal, Inc.</p>
+    <p class="address">Austin, Texas</p>
+    <div class="contact"><a href="mailto:info@cruxal.ai">info@cruxal.ai</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
